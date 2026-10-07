@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine?</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #1a0933;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      overflow: hidden;
+      color: white;
+    }
+    .card {
+      background: #ffffff;
+      color: #333;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 85%;
+      max-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    img {
+      width: 130px;
+      height: 130px;
+      border-radius: 10px;
+    }
+    h2 {
+      color: #ff3366;
+      font-size: 20px;
+      margin: 15px 0;
+      line-height: 1.4;
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 20px;
+      width: 100%;
+      min-height: 60px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .yes-btn {
+      background-color: #ff3366;
+      color: white;
+    }
+    .no-btn {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img id="gif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY1Y2p0Z3p6aXo1ZXB6Z3Z1OHBzaHl3a3ZwbzNqZXprYnZhNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c76IJLufpNwSULPk77/giphy.gif" alt="Cute Bear">
+    <h2 id="question">ငါ့ရည်းစား လုပ်မလား? 💖</h2>
+    
+    <div class="btn-container">
+      <button class="yes-btn" id="yesBtn" onclick="acceptProposal()">Yes 🥺</button>
+      <button class="no-btn" id="noBtn" onclick="handleNo()">No 😜</button>
+    </div>
+  </div>
+
+  <script>
+    let yesScale = 1.0;
+
+    function handleNo() {
+      const btn = document.getElementById('noBtn');
+      const yesBtn = document.getElementById('yesBtn');
+
+      // 1. "No" နှိပ်ရင် စာသား ပြောင်းပေးခြင်း
+      document.getElementById('question').innerText = "စဉ်းစားပါအုံး သေချာစဉ်းစားပေးပါ 🥺💖";
+
+      // 2. Yes ခလုတ် ကြီးလာစေခြင်း
+      yesScale += 0.2;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      // 3. No ခလုတ် ပြေးစေခြင်း
+      btn.style.position = 'fixed';
+      
+      const padding = 60;
+      const maxX = window.innerWidth - btn.offsetWidth - padding;
+      const maxY = window.innerHeight - btn.offsetHeight - padding;
+
+      const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
+      const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
+
+      btn.style.left = randomX + 'px';
+      btn.style.top = randomY + 'px';
+    }
+
+    function acceptProposal() {
+      // Yes နှိပ်လိုက်ရင် ပေါ်မယ့် စာသားနဲ့ Sticker
+      document.getElementById('question').innerText = "ဟီး ချစ်လိုက်တာဗျာလေးရယ် 🥰❤️✨";
+      document.getElementById('gif').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZudXp4NWU5bnJ4a3pxOHV4cm9zc3h3OHlyNms2ZnIycDRrN3R5ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/MDJ9IbxxvDUQM/giphy.gif";
+      document.getElementById('noBtn').style.display = 'none';
+      document.getElementById('yesBtn').style.transform = 'scale(1)';
+    }
+  </script>
+</body>
+</html>
